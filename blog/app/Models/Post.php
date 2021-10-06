@@ -12,31 +12,33 @@ class Post
     public $title;
     public $slug;
     public $body;
+    public $date;
 
-    public function __construct($title,$slug,$body)
+    public function __construct($title,$slug,$body,$date)
     {
         $this->title = $title;
         $this->slug = $slug;
-        $this->body = $body;        
+        $this->body = $body;
+        $this->date = $date;        
     }
 
 
 
     public static function find($slug)
     {
-        $path = resource_path("/posts/{$slug}.html"); #path to the file
+        // $path = resource_path("/posts/{$slug}.html"); #path to the file
         
-        if(!file_exists($path)) #redirect or abort if file not found
-        {
-            throw new ModelNotFoundException();
-            //return redirect('/');
-            //abort(404);
-        }
-        $documents = YamlFrontMatter::parseFile($path);
+        // if(!file_exists($path)) #redirect or abort if file not found
+        // {
+        //     throw new ModelNotFoundException();
+        //     //return redirect('/');
+        //     //abort(404);
+        // }
+        // $documents = YamlFrontMatter::parseFile($path);
 
         //return cache()->remember("posts.{$slug}", 5, fn() => $documents->body(),$documents->title); # save in cache for 5 secs 
         
-        return cache()->remember("posts.{$slug}", 5, fn() => New Post($documents->title,$documents->slug,$documents->body()));
+        //return cache()->remember("posts.{$slug}", 5, fn() => New Post($documents->title,$documents->slug,$documents->body()));
         
         /*
         $post = cache()->remember("posts.{$slug}", 5, function() use($path) # save in cache for 5 secs 
@@ -45,7 +47,7 @@ class Post
             return file_get_contents($path);
         });
         */
-       
+       return static::all()->firstWhere('slug',$slug);
     }
 
     public static function all()
@@ -58,6 +60,9 @@ class Post
         }, $files);
           */
           
+
+          //using array map
+          /*
           $files_in_posts = File::files(resource_path("posts"));
             
             $posts = array_map(function($document){
@@ -75,7 +80,25 @@ class Post
 
           return $posts; 
 
-
+            */
+            //check cache run in terminal
+            //php artisan tinker
+            //cache('anything')
+            //after adding new post run
+            //cache()->forget('anything')
+            return cache()->rememberForever('anything', function () {
+                $files = File::files(resource_path("posts/"));
+                return collect($files)
+                ->map(fn($file)=>YamlFrontMatter::parseFile($file))
+                ->map(fn($document)=>new Post(
+                    $document->title,
+                    $document->slug,
+                    $document->body(),
+                    $document->date
+                ))
+                ->sortByDesc('date');    
+            });
+            
 
     }
 }
