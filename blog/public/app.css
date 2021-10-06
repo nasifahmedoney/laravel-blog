@@ -1,0 +1,21 @@
+body{
+    background: whitesmoke;
+    color: black;
+    margin: auto;
+    margin-top: 3rem;
+    padding-top: 10px;
+    max-width: 600px;
+    font-family: sans-serif;
+}
+p{
+    line-height: 1.6;
+}
+
+
+/* article that comes after another article */
+
+article + article{
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid lightblue;
+}
