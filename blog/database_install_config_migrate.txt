@@ -1,0 +1,33 @@
+
+
+#install mysql-server
+sudo apt install mysql-server
+
+
+#check after install
+systemctl status mysql
+
+
+#service start restart
+sudo service mysql start
+sudo service mysql restart
+sudo service mysql stop
+
+
+#replace 'Current-Root-Password'
+sudo mysql
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Current-Root-Password';
+FLUSH PRIVILEGES;
+#check root
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+
+#laravel migrations install
+sudo apt install php-mysql
+
+configure .env file
+
+#php artisan migrate
+
+
+
