@@ -1,0 +1,26 @@
+#create a posts table
+
+php artisan make:migration create_posts_table
+
+enter databse fields
+
+php artisan migrate
+
+#create corresponding eloquent model
+
+php artisan make:model Post  #usually singular of create_"posts"_table
+
+#insert data into the database
+
+php artisan tinker
+
+>>>use App\Models\Post; #for accessing Post directly
+
+$post = new App\Models\Post;
+
+
+>>> $post->title = 'First Post';
+>>> $post->body = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam.';
+=> "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam."
+
+
