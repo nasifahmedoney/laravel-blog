@@ -23,4 +23,7 @@ $post = new App\Models\Post;
 >>> $post->body = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam.';
 => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam."
 
-
+#other commands
+$post->save();//run query
+$post->all();//show all data
+$post->first();
