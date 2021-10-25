@@ -1,31 +1,35 @@
 
-
 #install mysql-server
 sudo apt install mysql-server
+sudo mysql_secure_installation utility
 
 
 #check after install
 systemctl status mysql
-
 
 #service start restart
 sudo service mysql start
 sudo service mysql restart
 sudo service mysql stop
 
+#mysql shell
+sudo mysql -u root -p
 
-#replace 'Current-Root-Password'
+
+--
+#replace 'Current-Root-Password'->policy errors->use complex password
 sudo mysql
 SELECT user,authentication_string,plugin,host FROM mysql.user;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Current-Root-Password';
 FLUSH PRIVILEGES;
 #check root
 SELECT user,authentication_string,plugin,host FROM mysql.user;
+--
 
 #laravel migrations install
 sudo apt install php-mysql
 
-configure .env file
+configure .env file ->access denied error->use quotes around db name and password
 
 #php artisan migrate
 
