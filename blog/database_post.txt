@@ -2,6 +2,11 @@
 
 php artisan make:migration create_posts_table
 
+#or create models with migration
+
+php artisan make:model Category -m
+
+
 enter databse fields
 
 php artisan migrate
@@ -22,6 +27,14 @@ $post = new App\Models\Post;
 >>> $post->title = 'First Post';
 >>> $post->body = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam.';
 => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam."
+
+#mass assignment
+Post::create(['title'=>'First Post','excerpt'=>'excerpt of the post','body'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam.']);
+Post::update(['title'=>'new title')];
+$post->update(['title'=>'new title')];
+
+
+
 
 #other commands
 $post->save();//run query
