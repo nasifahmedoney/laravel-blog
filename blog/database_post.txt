@@ -40,3 +40,10 @@ $post->update(['title'=>'new title')];
 $post->save();//run query
 $post->all();//show all data
 $post->first();
+
+//accessing category fields from post,check App/Models/Post category function
+$post = App\Models\Post::all(); or
+$post = App\Models\Post::first();
+
+//mass assignment
+Post::create(['title'=>'family post','excerpt'=>'excerpt for the post','body'=>'Lorem ipsum dolor sit amet','slug'=>'my-family-post','category_id'=>1]);
