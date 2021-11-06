@@ -45,5 +45,5 @@ $post->first();
 $post = App\Models\Post::all(); or
 $post = App\Models\Post::first();
 
-//mass assignment
-Post::create(['title'=>'family post','excerpt'=>'excerpt for the post','body'=>'Lorem ipsum dolor sit amet','slug'=>'my-family-post','category_id'=>1]);
+//mass assignment with category
+Post::create(['title'=>'hobby post','excerpt'=>'excerpt for the post','body'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam.','slug'=>'my-hobby-post','category_id'=>3]);
