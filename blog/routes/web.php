@@ -19,28 +19,29 @@ use Illuminate\Support\Facades\Route;
 #});
 
 
+//$post = Post::all();
+//
+//ddd(Post::all());
+
 
 Route::get('/', function () {
-    //$post = Post::all();
-    //
-    //ddd(Post::all());
-
     return view('posts', [
-        'posts_var_from_route' => Post::all()
+        'posts' => Post::all()
     ]);
 });
 
-Route::get('/post/{post:slug}', function (Post $post) {
-    //find post by its slug and pass it to a view called "post"
-    //$post = Post::findOrFail($id);
-    
+Route::get('post/{post:slug}', function (Post $post) 
+{
     return view('post',[
         'post' => $post
     ]);
 });
+
+
+
 Route::get('categories/{category:slug}',function(Category $category)
 {
-    return view('posts',['posts_var_from_route' => $category->posts]);
+    return view('posts',['posts' => $category->posts]);
 });
 
 
