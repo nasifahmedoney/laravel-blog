@@ -11,8 +11,8 @@ class Post extends Model
 
     protected $guarded = [];
 
-    //protected $fillable = ['title','excerpt','body','slug','category_id'];
-    //protected $guarded = ['id']; #opposite of fillable
+    //protected $fillable = ['title','excerpt','body','slug','category_id']; #mass assignment only these fields
+    //protected $guarded = ['id']; #mass assignment except these fields
 
 
     public function category()
