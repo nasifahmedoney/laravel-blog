@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 /*
@@ -29,14 +30,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/post/{post}', function ($id) {
+Route::get('/post/{post:slug}', function (Post $post) {
     //find post by its slug and pass it to a view called "post"
-    $post = Post::findOrFail($id);
+    //$post = Post::findOrFail($id);
     
     return view('post',[
         'post' => $post
     ]);
-});  
+});
+Route::get('categories/{category:slug}',function(Category $category)
+{
+    return view('posts',['posts_var_from_route' => $category->posts]);
+});
+
+
     /*
     $path = __DIR__."/../resources/posts/{$slug}.html"; #path to the file
     
