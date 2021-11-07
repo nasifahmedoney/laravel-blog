@@ -19,7 +19,15 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         Category::truncate();
         Post::truncate();
+        
+        $user = User::factory()->create([
+            'name' => 'nasif'
+        ]);
+        Post::factory(5)->create([
+            'user_id' => $user->id
+        ]);
 
+        /*
         $user = User::factory()->create();
 
         $personal = Category::create(
@@ -61,5 +69,7 @@ class DatabaseSeeder extends Seeder
                 'body' => '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, minima modi sit iure aperiam dicta quas ea ratione, similique praesentium adipisci ab accusantium quisquam voluptates eveniet! Quia deleniti inventore totam.</p>'
             ]
         );
+
+        */
     }
 }
