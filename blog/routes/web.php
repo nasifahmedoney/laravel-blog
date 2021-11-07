@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,13 @@ use Illuminate\Support\Facades\Route;
 //$post = Post::all();
 //
 //ddd(Post::all());
-
+//using $with property in Post model, n+1 problem, Post-> category,author
 
 Route::get('/', function () {
     return view('posts', [
-        'posts' => Post::latest()->with('category')->get()
+        //using $with property in Post model, n+1 problem, Post-> category,author
+        'posts' => Post::latest()->get()
+        //'posts' => Post::latest()->with('category','author')->get()
         //latest('published_at') to specify field
     ]);
 });
@@ -38,11 +41,21 @@ Route::get('post/{post:slug}', function (Post $post)
     ]);
 });
 
-
-
 Route::get('categories/{category:slug}',function(Category $category)
 {
-    return view('posts',['posts' => $category->posts]);
+    return view('posts',[
+        //using $with property in Post model
+        'posts' => $category->posts
+        //'posts' => $category->posts->load('category','author')
+    ]);
+});
+
+Route::get('authors/{authors:username}',function(User $authors)
+{
+    return view('posts',[
+        //using $with property in Post model
+        'posts' => $authors->posts
+    ]);
 });
 
 
