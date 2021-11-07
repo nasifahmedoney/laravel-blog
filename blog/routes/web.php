@@ -26,7 +26,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('posts', [
-        'posts' => Post::all()
+        'posts' => Post::latest()->with('category')->get()
+        //latest('published_at') to specify field
     ]);
 });
 
