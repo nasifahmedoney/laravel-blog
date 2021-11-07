@@ -11,6 +11,8 @@ class Post extends Model
 
     protected $guarded = [];
 
+    protected $with = ['category','author'];
+
     //protected $fillable = ['title','excerpt','body','slug','category_id']; #mass assignment only these fields
     //protected $guarded = ['id']; #mass assignment except these fields
 
