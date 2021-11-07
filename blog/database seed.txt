@@ -14,3 +14,9 @@ App\Models\Post::factory()->create();
 
 //'user','category' ->Post model
     App\Models\Post::with('user','category')->first();
+
+//creates posts and user does not create new category
+App\Models\Post::factory(10)->create(['category_id' => 1]);
+
+//
+App\Models\Post::without('author','category')->first()
