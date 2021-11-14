@@ -1,10 +1,10 @@
-@extends('layout')
+{{-- @extends('layout') --}}
 
 {{-- @section('banner')
     <h1 style="text-align: center">my blog</h1>
 @endsection --}}
 
-@section('content')
+{{-- @section('content')
     @foreach ($posts as $post)
     <article>
         <a href="/post/{{$post->slug}}"><h1>{{$post->title}}</h1></a>
@@ -16,7 +16,30 @@
 
     </article>
     @endforeach
-@endsection
-    
-  
+@endsection --}}
+
+
+<x-layout>
+
+    @include('_post-header')
+
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        <x-post-featured />
+
+        <div class="lg:grid lg:grid-cols-2">
+            
+            <x-post-card />
+            <x-post-card />
+            
+        </div>
+
+        <div class="lg:grid lg:grid-cols-3">
+            <x-post-card />
+            <x-post-card />
+            <x-post-card />
+        </div>
+    </main>
+
+
+</x-layout>  
 
