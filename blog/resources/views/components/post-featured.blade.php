@@ -1,3 +1,4 @@
+{{-- from posts-grid.blade.php --}}
 @props(['post'])
 
 
