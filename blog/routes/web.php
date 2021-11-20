@@ -33,7 +33,7 @@ Route::get('/', function () {
         //'posts' => Post::latest()->with('category','author')->get()
         //latest('published_at') to specify field
     ]);
-});
+})->name('home');
 
 
 Route::get('post/{post:slug}', function (Post $post) 
@@ -53,7 +53,7 @@ Route::get('categories/{category:slug}',function(Category $category)
         'categories' => Category::all()
         //'posts' => $category->posts->load('category','author')
     ]);
-});
+})->name('category');
 
 Route::get('authors/{authors:username}',function(User $authors)
 {
