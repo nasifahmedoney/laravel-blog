@@ -19,6 +19,9 @@ class CategoryFactory extends Factory
      *
      * @return array
      */
+
+     //duplicate key error in categories.categories_name_unique
+     //'name' => $this->faker->unique()->word(), 'slug' => $this->faker->unique()->slug()
     public function definition()
     {
         return [

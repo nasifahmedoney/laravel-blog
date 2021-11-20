@@ -20,3 +20,10 @@ App\Models\Post::factory(10)->create(['category_id' => 1]);
 
 //
 App\Models\Post::without('author','category')->first()
+
+//create category 
+use App\Models\Category;
+//one entry->set factory(10) for ten entries
+App\Models\Category::factory()->create();
+//create 10 posts with user_id 1 and category_id 1
+App\Models\Post::factory(10)->create(['user_id' => 1,'category_id'=> 1]);
