@@ -16,17 +16,14 @@ class Post extends Model
     //protected $fillable = ['title','excerpt','body','slug','category_id']; #mass assignment only these fields
     //protected $guarded = ['id']; #mass assignment except these fields
 
-
-    //$query->when($filters['search'] ?? false, fn($query, $search)=>
-
+    
     public function scopeFilter($query, array $filters)
     {
-        if( $filters['search'] ?? false) //using array, null safe function
-        {
+        $query->when($filters['search'] ?? false, fn($query,$search)=>
             $query
-                ->where('title', 'like', '%'.request('search').'%')
-                ->orWhere('body', 'like', '%'.request('search').'%');
-        }
+                ->where('title', 'like', '%'.$search.'%')
+                ->orWhere('body', 'like', '%'.$search.'%')
+            );
     }
 
     public function category()
