@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -25,25 +26,7 @@ use Illuminate\Support\Facades\Route;
 //ddd(Post::all());
 //using $with property in Post model, n+1 problem, Post-> category,author
 
-Route::get('/', function () {
-
-    $posts = Post::latest();
-
-    if( request('search'))
-    {
-        $posts
-            ->where('title', 'like', '%'.request('search').'%')
-            ->orWhere('body', 'like', '%'.request('search').'%');
-    }
-
-    return view('posts', [
-        //using $with property in Post model, n+1 problem, Post-> category,author
-        'posts' => $posts->get(),
-        'categories' => Category::all()
-        //'posts' => Post::latest()->with('category','author')->get()
-        //latest('published_at') to specify field
-    ]);
-})->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 
 Route::get('post/{post:slug}', function (Post $post) 
