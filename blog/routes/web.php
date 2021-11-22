@@ -26,9 +26,19 @@ use Illuminate\Support\Facades\Route;
 //using $with property in Post model, n+1 problem, Post-> category,author
 
 Route::get('/', function () {
+
+    $posts = Post::latest();
+
+    if( request('search'))
+    {
+        $posts
+            ->where('title', 'like', '%'.request('search').'%')
+            ->orWhere('body', 'like', '%'.request('search').'%');
+    }
+
     return view('posts', [
         //using $with property in Post model, n+1 problem, Post-> category,author
-        'posts' => Post::latest()->get(),
+        'posts' => $posts->get(),
         'categories' => Category::all()
         //'posts' => Post::latest()->with('category','author')->get()
         //latest('published_at') to specify field
