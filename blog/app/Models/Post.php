@@ -16,9 +16,12 @@ class Post extends Model
     //protected $fillable = ['title','excerpt','body','slug','category_id']; #mass assignment only these fields
     //protected $guarded = ['id']; #mass assignment except these fields
 
-    public function scopeFilter($query)
+
+    //$query->when($filters['search'] ?? false, fn($query, $search)=>
+
+    public function scopeFilter($query, array $filters)
     {
-        if( request('search'))
+        if( $filters['search'] ?? false) //using array, null safe function
         {
             $query
                 ->where('title', 'like', '%'.request('search').'%')
