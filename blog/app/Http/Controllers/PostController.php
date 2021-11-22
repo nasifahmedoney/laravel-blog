@@ -25,6 +25,14 @@ class PostController extends Controller
         'categories' => Category::all()
         //'posts' => Post::latest()->with('category','author')->get()
         //latest('published_at') to specify field
-    ]);
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+        return view('post',[
+            'post' => $post,
+            'categories' => Category::all()
+        ]);
     }
 }

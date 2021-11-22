@@ -28,14 +28,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
+Route::get('post/{post:slug}', [PostController::class, 'show'] );
 
-Route::get('post/{post:slug}', function (Post $post) 
-{
-    return view('post',[
-        'post' => $post,
-        'categories' => Category::all()
-    ]);
-});
 
 Route::get('categories/{category:slug}',function(Category $category)
 {
