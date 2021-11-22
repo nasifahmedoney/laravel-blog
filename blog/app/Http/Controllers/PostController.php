@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index()
     {
         return view('posts', [
-            'posts' => $this->getPosts(),
+            'posts' => Post::latest()->filter()->get(), //filter() defined in Post model
             'categories' => Category::all()
             ]);
     }
@@ -24,17 +24,19 @@ class PostController extends Controller
         ]);
     }
 
-    protected function getPosts()
-    {
-        $posts = Post::latest();
+    // protected function getPosts()
+    // {
+    //     $posts = Post::latest();
 
-        if( request('search'))
-        {
-            $posts
-                ->where('title', 'like', '%'.request('search').'%')
-                ->orWhere('body', 'like', '%'.request('search').'%');
-        }
+    //     if( request('search'))
+    //     {
+    //         $posts
+    //             ->where('title', 'like', '%'.request('search').'%')
+    //             ->orWhere('body', 'like', '%'.request('search').'%');
+    //     }
 
-        return $posts->get();
-    }
+    //     return $posts->get();
+    // }
 }
+
+//using post controller optional #3
