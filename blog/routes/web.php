@@ -42,14 +42,14 @@ Route::get('post/{post:slug}', [PostController::class, 'show'] );
 //     ]);
 // })->name('category');
 
-Route::get('authors/{authors:username}',function(User $authors)
-{
-    return view('posts',[
-        //using $with property in Post model
-        'posts' => $authors->posts,
-        'categories' => Category::all()
-    ]);
-});
+// Route::get('authors/{authors:username}',function(User $authors)
+// {
+//     return view('posts.index',[
+//         //using $with property in Post model
+//         'posts' => $authors->posts,
+//         'categories' => Category::all()
+//     ]);
+// });
 
 
     /*
