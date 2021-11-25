@@ -1,4 +1,4 @@
-{{-- from posts.blade.php --}}
+{{-- from posts.blade.php (index.blade) --}}
 @props(['posts'])
 
 <x-post-featured :post="$posts[0]"/>

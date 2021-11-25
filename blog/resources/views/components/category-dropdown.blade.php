@@ -9,13 +9,12 @@
     </x-slot>
     {{-- "space" or "return" before :active --}}
     <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
-
+    {{-- exclude name="category"->form->_header.blade  --}}
     @foreach ($categories as $category)
-    {{-- {{isset($currentCategory) && $currentCategory->is($category) ? 'bg-blue-500 text-white' : ''}} --}}
-    <x-dropdown-item href="/?category={{ $category->slug }}"
-        {{-- :active="isset($currentCategory) && $currentCategory->is($category)" --}}
-        :active="request()->is('categories/'.$category->slug)"
-        >{{ ucwords($category->name) }}</x-dropdown-item>
+    <x-dropdown-item href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category')) }}"
+        :active="request()->is('categories/'.$category->slug)">
+        {{ ucwords($category->name) }}
+    </x-dropdown-item>
     @endforeach
     
 </x-dropdown>
