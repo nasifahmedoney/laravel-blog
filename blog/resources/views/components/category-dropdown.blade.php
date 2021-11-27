@@ -8,10 +8,10 @@
         </button>
     </x-slot>
     {{-- "space" or "return" before :active --}}
-    <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
+    <x-dropdown-item href="/?{{ http_build_query(request()->except('category','page')) }}" :active="request()->routeIs('home')">All</x-dropdown-item>
     {{-- exclude name="category"->form->_header.blade  --}}
     @foreach ($categories as $category)
-    <x-dropdown-item href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category')) }}"
+    <x-dropdown-item href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category','page')) }}"
         :active="request()->is('categories/'.$category->slug)">
         {{ ucwords($category->name) }}
     </x-dropdown-item>
