@@ -33,6 +33,17 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    //accessor
+    // public function getUsernameAttribute($username)
+    // {
+    //     return ucwords($username); //camel case while rerieving from database
+    // }
+
+    //using mutators
+    public function setPasswordAttribute($password) //naming convension set (Attributename) Attribute ->Password,Username,Name ->not case sensative
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
     /**
      * The attributes that should be cast.
      *
