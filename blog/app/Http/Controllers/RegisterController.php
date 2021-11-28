@@ -23,7 +23,7 @@ class RegisterController extends Controller
             
             //equalvalent
             //'username' => 'required|unique:users,username'
-            //'username' => ['required', Rule::unique('users','username')]
+            //'username' => ['required', Rule::unique('users','username')] //used with conditions Rule::unique('users','username')->ignore something
         ]);
 
         //option 1

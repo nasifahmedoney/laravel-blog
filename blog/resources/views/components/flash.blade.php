@@ -1,5 +1,5 @@
 {{-- equivalent --}}
-{{-- Session::get('success') --}}
+{{-- Session::get('success'), Session::has('success') --}}
 @if(session()->has('success'))
     <div x-data="{ show: true }"
          x-init="setTimeout( ()=> show= false, 4000)"
