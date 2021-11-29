@@ -35,12 +35,12 @@
             </div>
 
             <div class="mt-8 md:mt-0 flex items-center">
-                {{-- only guest visibility --}}
+                {{-- only guest visibility middleware guest--}}
                 {{-- @guest
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>    
                 @endguest --}}
                     
-                {{-- only logged in user visibility --}}
+                {{-- only logged in user visibility, middleware guest --}}
                 @auth
                     <span class="text-xs font-bold uppercase">{{ auth()->user()->name}}</span>
                     {{-- Auth::user()->name, also works --}}
