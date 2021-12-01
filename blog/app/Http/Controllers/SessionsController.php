@@ -30,13 +30,12 @@ class SessionsController extends Controller
         //attempt()->login and start session automatically if ok
         if(Auth::attempt($attributes)) 
         {
-            session()->regenerate();
-            return redirect('/')->with('success', 'login successful');
+            throw ValidationException::withMessages([
+                'email' => 'your provided credentials could not be varified'
+            ]);
         }
 
-        throw ValidationException::withMessages([
-            'email' => 'your provided credentials could not be varified'
-        ]);
-
+        session()->regenerate();
+        return redirect('/')->with('success', 'login successful');
     }
 }
