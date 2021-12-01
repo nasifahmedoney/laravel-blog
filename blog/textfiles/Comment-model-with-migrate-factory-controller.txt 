@@ -1,0 +1,2 @@
+php artisan make:model Comment -mfc
+#creates a Comment model with create-comments-table, factory,controller and migrate
