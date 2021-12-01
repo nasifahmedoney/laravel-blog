@@ -1,2 +1,31 @@
 php artisan make:model Comment -mfc
 #creates a Comment model with create-comments-table, factory,controller and migrate
+
+php artisan tinker
+App\Models\Comment::factory()->create();
+
+php artisan tinker
+$c = App\Models\Comment::first();
+
+$c->post;
+$c->author;
+
+//accessing comments from post
+Post model
+public function comments()
+{
+    return $this-> hasMany(Comment::class);//A post hasMany comments
+}
+
+
+$c->post->comments;//HasMany()->returns all()
+
+$c->post->can access all post table fields and author(belongsTo), category(belongsTo), comments
+
+php artisan tinker
+$post = App\Models\Post::latest()->first(); //get the lastest post id
+
+#create 10 comments with post id set to 31
+App\Models\Comment::factory(10)->create(['post_id'=> 31]);
+
+
