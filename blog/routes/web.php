@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostCommentsController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -29,9 +30,13 @@ use App\Http\Controllers\SessionsController;
 //ddd(Post::all());
 //using $with property in Post model, n+1 problem, Post-> category,author
 
+//restful actions
+//index, show, create, store, edit, update, destroy 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('post/{post:slug}', [PostController::class, 'show'] );
+Route::post('post/{post:slug}/comments', [PostCommentsController::class, 'store'] );
+
 
 Route::get('register', [RegisterController::class, 'create'] )->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'] )->middleware('guest');

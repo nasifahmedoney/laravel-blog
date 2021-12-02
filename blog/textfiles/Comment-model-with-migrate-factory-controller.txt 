@@ -28,4 +28,6 @@ $post = App\Models\Post::latest()->first(); //get the lastest post id
 #create 10 comments with post id set to 31
 App\Models\Comment::factory(10)->create(['post_id'=> 31]);
 
+#php artisan make:controller PostCommentsController
+
 
