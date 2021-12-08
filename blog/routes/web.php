@@ -31,7 +31,33 @@ use App\Http\Controllers\SessionsController;
 //using $with property in Post model, n+1 problem, Post-> category,author
 
 //restful actions
-//index, show, create, store, edit, update, destroy 
+//index, show, create, store, edit, update, destroy
+Route::post('newsletter', function(){
+    request()->validate([
+        'email' => 'required|email'
+    ]);//required, of type 'email'
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us20'
+    ]);
+    try{
+        //$response = $mailchimp->ping->get();
+        $response = $mailchimp->lists->addListMember('a074cf2add',[
+            'email_address' => request('email'),
+            'status' => 'subscribed'
+        ]);
+    }
+    catch(\Exception $e){
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'email' => 'Cant add to email list'
+        ]);
+    }
+    
+    //ddd($response);
+    return redirect('/')->with('success','Subscribed!');
+}); 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('post/{post:slug}', [PostController::class, 'show'] );

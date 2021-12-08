@@ -1,0 +1,38 @@
+#Get the api key
+mailchimp website
+Audience->Account->extras->Api key
+
+#.env file add mailchimp_key
+MAILCHIMP_KEY=paste key here
+
+#accessing data
+config>services.php
+add
+'mailchimp' =>[
+        'key' => env('MAILCHIMP_KEY')
+    ]
+
+#access from terminal
+php artisan tinker
+config('services.mailchimp.key') or
+config('services.mailchimp')
+
+#sudo apt install php-curl
+
+composer require mailchimp/marketing
+
+#add to route
+/*
+//require_once('/path/to/MailchimpMarketing/vendor/autoload.php');
+
+$mailchimp = new \MailchimpMarketing\ApiClient();
+
+$mailchimp->setConfig([
+	'apiKey' => 'YOUR_API_KEY',
+	'server' => 'YOUR_SERVER_PREFIX'
+]);
+
+$response = $mailchimp->ping->get();
+print_r($response);
+
+*/
