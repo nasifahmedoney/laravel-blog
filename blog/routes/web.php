@@ -5,10 +5,11 @@ use App\Http\Controllers\PostCommentsController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-
+use Illuminate\Validation\ValidationException;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,21 +37,13 @@ Route::post('newsletter', function(){
     request()->validate([
         'email' => 'required|email'
     ]);//required, of type 'email'
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => 'us20'
-    ]);
+    
     try{
-        //$response = $mailchimp->ping->get();
-        $response = $mailchimp->lists->addListMember('a074cf2add',[
-            'email_address' => request('email'),
-            'status' => 'subscribed'
-        ]);
+        $newsletter = new Newsletter();
+        $newsletter->subscribe(request('email'));
     }
-    catch(\Exception $e){
-        throw \Illuminate\Validation\ValidationException::withMessages([
+    catch(Exception $e){
+        throw ValidationException::withMessages([
             'email' => 'Cant add to email list'
         ]);
     }

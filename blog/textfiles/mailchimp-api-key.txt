@@ -36,3 +36,9 @@ $response = $mailchimp->ping->get();
 print_r($response);
 
 */
+
+create new dir
+'Services' in app
+Newsletter.php
+
+
