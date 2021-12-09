@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentsController;
 use App\Models\Category;
@@ -33,24 +34,7 @@ use Illuminate\Validation\ValidationException;
 
 //restful actions
 //index, show, create, store, edit, update, destroy
-Route::post('newsletter', function(Newsletter $newsletter){
-    request()->validate([
-        'email' => 'required|email'
-    ]);//required, of type 'email'
-    
-    try{
-        
-        $newsletter->subscribe(request('email'));
-    }
-    catch(Exception $e){
-        throw ValidationException::withMessages([
-            'email' => 'Cant add to email list'
-        ]);
-    }
-    
-    //ddd($response);
-    return redirect('/')->with('success','Subscribed!');
-}); 
+Route::post('newsletter', NewsletterController::class); 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('post/{post:slug}', [PostController::class, 'show'] );
