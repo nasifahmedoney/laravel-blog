@@ -41,4 +41,6 @@ create new dir
 'Services' in app
 Newsletter.php
 
+add to .env
+MAILCHIMP_LIST_SUBSCRIBERS=a074cf2add
 

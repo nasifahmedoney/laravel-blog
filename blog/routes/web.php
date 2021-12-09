@@ -33,13 +33,13 @@ use Illuminate\Validation\ValidationException;
 
 //restful actions
 //index, show, create, store, edit, update, destroy
-Route::post('newsletter', function(){
+Route::post('newsletter', function(Newsletter $newsletter){
     request()->validate([
         'email' => 'required|email'
     ]);//required, of type 'email'
     
     try{
-        $newsletter = new Newsletter();
+        
         $newsletter->subscribe(request('email'));
     }
     catch(Exception $e){
