@@ -36,11 +36,13 @@ class PostController extends Controller
 
     public function create()
     {
-        //admin access only, without using middleware in routes 
-        if(auth()->user()?->username !== 'nasif_ahmed'){
-            abort(Response::HTTP_FORBIDDEN);
-        }
-
+        
+        // create middleware AdminsOnly, php artisan make:middleware AdminsOnly
+        // if(auth()->user()?->username !== 'nasif_ahmed'){
+        //     abort(Response::HTTP_FORBIDDEN);
+        // }
+        //checks for the login auth and redirect
+        //add middlware('admin') in route and AdminsOnly in kernel
         return view('posts.create');
     }
 }
