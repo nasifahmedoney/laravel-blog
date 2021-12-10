@@ -14,9 +14,7 @@
                 class="w-full text-sm focus:outline-none focus:ring"
                 placeholder="Comment"
                 rows="5"
-                required>
-                
-                </textarea>
+                required></textarea>
                 {{-- errors if any, show at the bottom of textarea  --}}
                 @error('body')
                     <span class="test-xs test-red-500">{{ $message }}</span>
