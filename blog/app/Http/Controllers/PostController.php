@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
-
+//use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -31,6 +32,16 @@ class PostController extends Controller
             'post' => $post,
             'categories' => Category::all()
         ]);
+    }
+
+    public function create()
+    {
+        //admin access only, without using middleware in routes 
+        if(auth()->user()?->username !== 'nasif_ahmed'){
+            abort(Response::HTTP_FORBIDDEN);
+        }
+
+        return view('posts.create');
     }
 }
 
