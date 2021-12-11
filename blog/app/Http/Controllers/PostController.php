@@ -47,8 +47,19 @@ class PostController extends Controller
     public function store()
     {
         //ddd(request()->all());
+        // file info
+        //ddd(request()->file('thumbnail'));
+        //creates a folder 'thumbnails' in storage>app> or storage>app>public>, file config set in config>filesystems.php
+        // Illuminate\http\UploadedFile;
+        // filesystems.php->'default' => env('FILESYSTEM_DRIVER', 'local'),check FILESYSTEM_DRIVER if not found 'local'
+        // .env file FILESYSTEM_DRIVER=public
+        // $path = request()->file('thumbnail')->store('thumbnails');
+        // return 'Done '.$path;
+
+
         $attributes = request()->validate([
             'title' => 'required',
+            'thumbnail' => 'required|image',
             'slug' => ['required', Rule::unique('posts', 'slug')],
             'excerpt' => 'required',
             'body' => 'required',
@@ -56,7 +67,7 @@ class PostController extends Controller
         ]);
 
         $attributes['user_id'] = auth()->id();
-
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         Post::create($attributes);
 
         return redirect('/');
