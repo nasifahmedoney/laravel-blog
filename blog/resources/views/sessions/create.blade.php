@@ -4,7 +4,7 @@
             <h1 class="text-center font-bold text-xl">Login</h1>
             <form method="POST" action="/login" class="mt-10">
                 @csrf
-                
+                {{-- check form auto-complete --}}
                 <div class="mb-6">
                     <label for="email" class="block mb-2 uppercase font-bold text-xs text-gray-700">
                         Email
