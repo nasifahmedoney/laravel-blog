@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
-use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -32,45 +31,5 @@ class PostController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        
-        // create middleware AdminsOnly, php artisan make:middleware AdminsOnly
-        // if(auth()->user()?->username !== 'nasif_ahmed'){
-        //     abort(Response::HTTP_FORBIDDEN);
-        // }
-        //checks for the login auth and redirect
-        //add middlware('admin') in route and AdminsOnly in kernel
-        return view('posts.create');
-    }
-
-    public function store()
-    {
-        //ddd(request()->all());
-        // file info
-        //ddd(request()->file('thumbnail'));
-        //creates a folder 'thumbnails' in storage>app> or storage>app>public>, file config set in config>filesystems.php
-        // Illuminate\http\UploadedFile;
-        // filesystems.php->'default' => env('FILESYSTEM_DRIVER', 'local'),check FILESYSTEM_DRIVER if not found 'local'
-        // .env file FILESYSTEM_DRIVER=public
-        // $path = request()->file('thumbnail')->store('thumbnails');
-        // return 'Done '.$path;
-
-
-        $attributes = request()->validate([
-            'title' => 'required',
-            'thumbnail' => 'required|image',
-            'slug' => ['required', Rule::unique('posts', 'slug')],
-            'excerpt' => 'required',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')]
-        ]);
-
-        $attributes['user_id'] = auth()->id();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
-        Post::create($attributes);
-
-        return redirect('/');
-    }
 }
 
