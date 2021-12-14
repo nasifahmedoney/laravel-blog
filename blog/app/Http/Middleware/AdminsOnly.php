@@ -17,9 +17,11 @@ class AdminsOnly
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()?->username !== 'nasif_ahmed'){
-            abort(Response::HTTP_FORBIDDEN);
-        }
+        // if(auth()->user()?->username !== 'nasif_ahmed'){
+        //     abort(Response::HTTP_FORBIDDEN);
+        // }
+        //check app>providers>appserviceproviders
+
         return $next($request);
     }
 }
