@@ -1,2 +1,0 @@
-# laravel-blog
-blog tutorial
